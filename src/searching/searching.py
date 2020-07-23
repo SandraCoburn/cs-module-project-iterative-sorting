@@ -11,8 +11,7 @@ def linear_search(arr, target):
 
     return -1   # not found
 
-# arr = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7, -4]
-# print(linear_search(arr, 9))
+
 
 # Write an iterative implementation of Binary Search
 def binary_search(arr, target):
@@ -36,3 +35,6 @@ def binary_search(arr, target):
             low = midd_point + 1
 
     return -1  # not found
+
+arr = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7, -4]
+print(binary_search(arr, 9))

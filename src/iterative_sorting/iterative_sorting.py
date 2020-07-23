@@ -30,9 +30,27 @@ def bubble_sort(arr):
     #repeat setps 1-3(decrementing the end of the list by 1 each time)
 
     return arr
-arr1 = [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
+arr1 = [1, 5, 8, 4, 2, 9,1,2, 6, 0, 3, 7]
 print(bubble_sort(arr1))
 
+def recursive_bubble_sort(arr, unsorted_length):
+    
+    #base case(s)
+    #re use the swaps_occurred boolean to tell us when the unsorted portion of the list reaches 0
+    #if the length of the unsorted portion is 0
+    if unsorted_length > 0:
+        #no return because we are not looking for an answer or return, we are only sorting
+        recursive_bubble_sort(arr, unsorted_length -1)
+    #how do we get closer to a base case?
+    #each pass shortens the unsorted portion by 1
+    #eac pass does the exact same thing as what it did in the iterative case
+    for i in range(unsorted_length -1):
+        #swap if arr[i] is greater than arr[1+1]
+        if  arr[i] > arr[i + 1]:
+            arr[i], arr[i+1] = arr[i+1], arr[i]
+arr = [2,14,27,4,9,22]
+recursive_bubble_sort(arr1, len(arr1))
+print(arr1)
 '''
 STRETCH: implement the Counting Sort function below
 
@@ -85,3 +103,5 @@ def counting_sort(arr, maximum=None):
         bucket[item] += 1
 
     return sorted_list
+
+
