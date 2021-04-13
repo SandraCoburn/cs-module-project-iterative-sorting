@@ -6,22 +6,51 @@ def selection_sort(arr):
         smallest_index = cur_index
         # TO-DO: find next smallest element
         # (hint, can do in 3 loc)
-        # Your code here
-
+        for unsorted_index in range(cur_index +1, len(arr)):
+            if arr[unsorted_index] < arr[smallest_index]:
+                smallest_index = unsorted_index
 
         # TO-DO: swap
         # Your code here
-
+        arr[smallest_index], arr[cur_index] = arr[cur_index], arr[smallest_index]
     return arr
 
 
 # TO-DO:  implement the Bubble Sort function below
 def bubble_sort(arr):
-    # Your code here
+    # Compare the first and second item of a collection
+    for item in range(0, len(arr) -1):
+    #if the first one is bigger than second, swap items moving lower to left
+        for i in range(len(arr)-item-1):
+            if  arr[i] > arr[i + 1]:
+                arr[i], arr[i+1] = arr[i+1], arr[i]
 
+    #move to the next item. compare the second item to the third item. if second is bigger, swap the items moving bigger to right
+    #Do this for every item until the end of the list
+    #repeat setps 1-3(decrementing the end of the list by 1 each time)
 
     return arr
+arr1 = [1, 5, 8, 4, 2, 9,1,2, 6, 0, 3, 7]
+print(bubble_sort(arr1))
 
+def recursive_bubble_sort(arr, unsorted_length):
+    
+    #base case(s)
+    #re use the swaps_occurred boolean to tell us when the unsorted portion of the list reaches 0
+    #if the length of the unsorted portion is 0
+    if unsorted_length > 0:
+        #no return because we are not looking for an answer or return, we are only sorting
+        recursive_bubble_sort(arr, unsorted_length -1)
+    #how do we get closer to a base case?
+    #each pass shortens the unsorted portion by 1
+    #eac pass does the exact same thing as what it did in the iterative case
+    for i in range(unsorted_length -1):
+        #swap if arr[i] is greater than arr[1+1]
+        if  arr[i] > arr[i + 1]:
+            arr[i], arr[i+1] = arr[i+1], arr[i]
+arr = [2,14,27,4,9,22]
+recursive_bubble_sort(arr1, len(arr1))
+print(arr1)
 '''
 STRETCH: implement the Counting Sort function below
 
@@ -40,7 +69,39 @@ buckets.
 What is the time and space complexity of the counting sort algorithm?
 '''
 def counting_sort(arr, maximum=None):
-    # Your code here
+    # the output array that will haver sorted arr. only integers
+    
+    if len(arr) > 0:
+        maximum = max(arr) + 1
+        bucket = [0] * maximum
+    else:
+        return arr
+
+    #check that array has no negative numbers
+    for item in arr:
+        if item < 0:
+            return "Error, negative numbers not allowed in Count Sort"
+        else:
+            #count occurences
+            bucket[item] += 1
+        
+    num_items_before = 0
+    #overwrite bucket to hold the next index
+    for i, count in enumerate(bucket):
+        bucket[i] = num_items_before
+        num_items_before += count
+
+    #output list to be filled in
+    sorted_list = [None] * len(arr)
+
+    #run through the input list
+    for item in arr:
+        #place the item in the sorted list
+        sorted_list[bucket[item]] = item
+
+        #make sure the next item we see with the same value goes after the one we just place
+        bucket[item] += 1
+
+    return sorted_list
 
 
-    return arr
